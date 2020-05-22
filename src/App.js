@@ -34,9 +34,15 @@ class App extends Component{
 
     this.setState({
       ninjas:ninjas
-    }
-    )
+    })
+  }
 
+  componentDidMount(){
+    console.log('mount')
+  }
+  componentDidUpdate(prevProps, prevState){
+    console.log('update')
+     console.log(prevProps, prevState)
   }
   render(){
     return (
