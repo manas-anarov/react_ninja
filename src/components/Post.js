@@ -3,6 +3,11 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 
 class Post  extends Component{
+
+	handleClick = () =>{
+		this.props.deletePost(this.props.post.id);
+		this.props.history.push('/')
+	}
  
 	render() { 
 		const  post = this.props.post ? (
@@ -11,6 +16,11 @@ class Post  extends Component{
 			<div className="center">{this.props.post.title}</div>
 			
 			<p>{this.props.post.body}</p>
+			<div className="center">
+				<button className="btn grey" onClick={this.handleClick}>
+					Delete Post
+				</button>
+			</div>
 			</div>
 		) : (
 			<div className="center">Loading post ..</div>
@@ -38,4 +48,14 @@ const mapStateToProps = (state, ownProps) =>{
 
 }
 
-export default connect(mapStateToProps)(Post) 
+
+
+const mapDispatchToProps = (dispatch) =>{
+
+	return{
+		deletePost:(id) => {dispatch({type:'DELETE_POST', id:id})}
+	}
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post) 
